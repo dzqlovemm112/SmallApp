@@ -1,0 +1,95 @@
+//
+//  HTTHeader.pch
+//  shengyijing
+//
+//  Created by mac on 16/3/10.
+//  Copyright © 2016年 zhtxwl_hx. All rights reserved.
+//
+//#if defined (__i386__) || defined (__x86_64__)
+//
+////模拟器下执行
+//#else
+//
+////真机下执行
+//#endif
+/*******接口url的宏********/
+#ifndef __OPTIMIZE__
+//这里执行的是debug模式下
+
+#else
+//这里执行的是release模式下
+
+#endif
+#import "UIImageView+WebCache.h"
+#import "HTHoldNullObj.h"
+#import "NSObject+holdNullObject.h"
+#import "AFNetworking.h"
+#import "Masonry.h"
+#import "MBProgressHUD+MJ.h"
+#import "MBProgressHUD.h"
+#import "HTHttpTools.h"
+#import "UIView+Extension.h"
+#import "HTShareClass.h"
+#import "UIColor+extend.h"
+#import "NSObject+Null.h"
+#import "NSString+Json.h"
+#import "NSDictionary+getValue.h"
+#ifndef HTTHeader_pch
+/*********shareSDK***********/
+
+
+
+//打印数据
+
+
+/*********shareSDK***********/
+#define HTTHeader_pch
+#define RGB(a,b,c,d) [UIColor colorWithRed:a green:b blue:c alpha:d]
+#define  HMSCREENWIDTH [UIScreen mainScreen].bounds.size.width
+#define HEIGHT [UIScreen mainScreen].bounds.size.height
+#define nav_height 64.0f
+#define tar_height 49.0f
+
+
+
+
+#ifndef    weakify
+#if __has_feature(objc_arc)
+
+#define weakify( x ) \\
+_Pragma("clang diagnostic push") \\
+_Pragma("clang diagnostic ignored \\"-Wshadow\\"") \\
+autoreleasepool{} __weak __typeof__(x) __weak_##x##__ = x; \\
+_Pragma("clang diagnostic pop")
+
+#else
+
+#define weakify( x ) \\
+_Pragma("clang diagnostic push") \\
+_Pragma("clang diagnostic ignored \\"-Wshadow\\"") \\
+autoreleasepool{} __block __typeof__(x) __block_##x##__ = x; \\
+_Pragma("clang diagnostic pop")
+
+#endif
+#endif
+
+#ifndef    strongify
+#if __has_feature(objc_arc)
+
+#define strongify( x ) \\
+_Pragma("clang diagnostic push") \\
+_Pragma("clang diagnostic ignored \\"-Wshadow\\"") \\
+try{} @finally{} __typeof__(x) x = __weak_##x##__; \\
+_Pragma("clang diagnostic pop")
+
+#else
+
+#define strongify( x ) \\
+_Pragma("clang diagnostic push") \\
+_Pragma("clang diagnostic ignored \\"-Wshadow\\"") \\
+try{} @finally{} __typeof__(x) x = __block_##x##__; \\
+_Pragma("clang diagnostic pop")
+
+#endif
+#endif
+#endif /* HTTHeader_pch */
